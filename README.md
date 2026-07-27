@@ -1,7 +1,7 @@
 # JOSS poster
 
-Source files for a JOSS poster that I first presented at
-[RSECon23](rsecon23.society-rse.org/).
+Source files for a JOSS poster, most recently presented at
+[RSECon26](https://rsecon26.society-rse.org/) (Sheffield, UK, September 2026).
 
 Made using the [`tikzposter`](https://ctan.org/pkg/tikzposter) LaTeX
 class.
