@@ -5,7 +5,7 @@ Fetch the most-cited JOSS articles from Crossref and print them as a list.
 Data source: Crossref REST API for ISSN 2475-9066 (Journal of Open Source
 Software), sorted by `is-referenced-by-count` in descending order.
 
-Fetched using ``curl`` (via subprocess).
+Fetched using `urllib` from the standard library.
 
 Usage:
     python3 scripts/most_cited.py                       # top 5
@@ -17,8 +17,8 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
 import sys
+import urllib.request
 from pathlib import Path
 
 ISSN = "2475-9066"
@@ -33,7 +33,7 @@ MAILTO = "jwa34@cam.ac.uk"  # polite-pool: Crossref asks for a contact address
 
 def fetch_most_cited(top: int) -> list[dict]:
     """
-    Fetch the top-N most-cited JOSS articles from Crossref via ``curl``.
+    Fetch the top-N most-cited JOSS articles from Crossref via `urllib`.
 
     Parameters
     ----------
@@ -49,21 +49,14 @@ def fetch_most_cited(top: int) -> list[dict]:
 
     Raises
     ------
-    CalledProcessError
-        If ``curl`` exits non-zero.
-    FileNotFoundError
-        If ``curl`` is not installed.
+    urllib.error.URLError
+        If the request to the Crossref API fails or times out.
     RuntimeError
         If the API response is malformed / empty.
     """
     url = f"{CROSSREF_URL}&rows={top}&mailto={MAILTO}"
-    result = subprocess.run(
-        ["curl", "-sf", "--max-time", "60", url],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    data = json.loads(result.stdout)
+    with urllib.request.urlopen(url, timeout=60) as resp:
+        data = json.load(resp)
     items = data["message"].get("items", [])
     if not items:
         raise RuntimeError("Crossref returned no items.")
