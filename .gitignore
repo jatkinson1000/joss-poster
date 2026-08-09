@@ -25,3 +25,11 @@ joss-poster.pdf
 # Downloaded images (regenerate with make)
 by.png
 JOSS-flowchart-updated.pdf
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+.venv/
+
+# Script data caches (regenerate by re-running the scripts)
+scripts/*.json
