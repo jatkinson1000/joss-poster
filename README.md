@@ -42,3 +42,8 @@ poster's content for the current date using the
   uv run scripts/pre_review_rejections.py             # fetch, print, plot
   uv run scripts/pre_review_rejections.py --use-json  # replot cached counts
   ```
+- `papers_by_track.py` — counts published JOSS papers per subject track
+  and prints the breakdown:
+  ```
+  uv run scripts/papers_by_track.py
+  ```
