@@ -9,7 +9,7 @@ class.
 `make` will download some images and compile the poster (basically
 with `pdflatex joss-poster`).
 
-You may need to install some LaTeX packages.
+You may need to install some LaTeX packages, including `texlive-fonts-extra`.
 
 Licensed under a [Creative Commons Attribution 4.0 International
 License](https://creativecommons.org/licenses/by/4.0/).
@@ -31,4 +31,14 @@ poster's content for the current date using the
   them as a list (citation counts, dates, DOIs, titles):
   ```
   python3 scripts/most_cited.py                  # top 5 (default)
+  ```
+- `pre_review_rejections.py` — counts JOSS submissions and pre-review
+  rejections per year from the issues of
+  [openjournals/joss-reviews](https://github.com/openjournals/joss-reviews),
+  and regenerates the `joss-rejections-per-year.png` figure.
+  Queries use the [GitHub CLI](https://cli.github.com), which must be
+  installed. Counts are cached to `scripts/pre_review_rejections.json`:
+  ```
+  uv run scripts/pre_review_rejections.py             # fetch, print, plot
+  uv run scripts/pre_review_rejections.py --use-json  # replot cached counts
   ```
