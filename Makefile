@@ -1,4 +1,4 @@
-joss-poster.pdf: joss-poster.tex JOSS-flowchart-updated.pdf by.png joss-logo-transparent-crop.png joss-papers-per-year.png joss-qr.png
+joss-poster.pdf: joss-poster.tex by.png joss-logo-transparent-crop.png joss-papers-per-year.png joss-rejections-per-year.png joss-qr.png
 	pdflatex \\nonstopmode\\input joss-poster.tex
 
 JOSS-flowchart-updated.pdf:
